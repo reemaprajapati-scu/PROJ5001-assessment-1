@@ -26,6 +26,10 @@ public class StudentMarksStatistics {
             marks[i - 1] = mark;
         }
 
+        scanner.close();
+
+        printAssignmentNameAndMarks();
+
     }
 
     /**
@@ -81,4 +85,15 @@ public class StudentMarksStatistics {
         }
     }
 
+
+    /**
+     * F4: Print Assignment name and Marks
+     */
+    public void printAssignmentNameAndMarks() {
+        System.out.println("Assignment Name:- " + assignmentName);
+
+        for (int i = 0; i < totalStudents; i++) {
+            System.out.println("Marks of Student " + (i + 1) + " = " + marks[i]);
+        }
+    }
 }
