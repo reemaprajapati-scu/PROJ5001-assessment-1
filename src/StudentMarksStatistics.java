@@ -4,20 +4,18 @@ public class StudentMarksStatistics {
 
     final private Scanner scanner;
     private String assignmentName;
-    private int[] marks;
-    private int totalStudents;
+    final private int[] marks;
+    final private int totalStudents;
 
-    StudentMarksStatistics() {
+    StudentMarksStatistics(int students) {
+        totalStudents = students;
+        marks = new int[totalStudents];
         scanner = new Scanner(System.in);
     }
 
     public void calculateMarksStatistics() {
 
         assignmentName = getAssignmentName();
-
-        totalStudents = getTotalStudents();
-
-        marks = new int[totalStudents];
 
         // F2: Allow input student's mark
         for (int i = 1; i <= totalStudents; i++) {
@@ -29,7 +27,7 @@ public class StudentMarksStatistics {
         scanner.close();
 
         printAssignmentNameAndMarks();
-
+        printHighestAndLowestMarks();
     }
 
     /**
@@ -39,30 +37,6 @@ public class StudentMarksStatistics {
     private String getAssignmentName() {
         System.out.print("Enter the assignment name:- ");
         return scanner.nextLine();
-    }
-
-    /**
-     * Get total number of students
-     * @return Total number of students
-     */
-    private int getTotalStudents() {
-        System.out.print("Input total students in the unit:- ");
-        while (true) {
-            String input = scanner.nextLine();
-
-            try {
-                totalStudents = Integer.parseInt(input);
-
-                if (totalStudents > 0) {
-                    break;
-                } else {
-                    System.out.println("Please enter valid number of students in the unit:- ");
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter valid number of students the unit:- ");
-            }
-        }
-        return totalStudents;
     }
 
     /**
@@ -77,14 +51,13 @@ public class StudentMarksStatistics {
                 if (mark >= 0 && mark <= 30) {
                     return mark;
                 } else {
-                    System.out.print("Please enter valid marks (0-30) for student " + index + ":- ");
+                    System.out.print("Please enter valid marks between 0 and 30 for student " + index + ":- ");
                 }
             } catch (NumberFormatException e) {
-                System.out.print("Invalid input. Please enter a valid number (0-30) for student " + index + ":- ");
+                System.out.print("Please enter a valid number between 0 and 30 for student " + index + ":- ");
             }
         }
     }
-
 
     /**
      * F4: Print Assignment name and Marks
@@ -95,5 +68,12 @@ public class StudentMarksStatistics {
         for (int i = 0; i < totalStudents; i++) {
             System.out.println("Marks of Student " + (i + 1) + " = " + marks[i]);
         }
+    }
+
+    /**
+     * F5: Print Assignment name and Marks
+     */
+    public void printHighestAndLowestMarks() {
+
     }
 }
