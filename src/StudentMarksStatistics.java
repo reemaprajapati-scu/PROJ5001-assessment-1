@@ -3,9 +3,9 @@ import java.util.Scanner;
 public class StudentMarksStatistics {
 
     final private Scanner scanner;
-    private String assignmentName;
     final private double[] marks;
     final private int totalStudents;
+    private String assignmentName;
 
     /**
      * Set assignment name
@@ -42,7 +42,7 @@ public class StudentMarksStatistics {
 
         // F2: Allow input student's mark
         for (int i = 1; i <= totalStudents; i++) {
-            System.out.print("Enter marks for student " + i + ":- ");
+            System.out.print("Enter mark for student " + i + ":- ");
             double mark = validateMarks(i);
             marks[i - 1] = mark;
         }
@@ -51,12 +51,12 @@ public class StudentMarksStatistics {
 
         printAssignmentNameAndMarks();
         printHighestAndLowestMarks();
+        printMeanAndStandardDeviation();
     }
-
 
     /**
      * F3: Check and show error if invalid mark is input
-     * @return mark of each student
+     * @return valid mark
      */
     public double validateMarks(int index) {
         while (true) {
@@ -88,7 +88,7 @@ public class StudentMarksStatistics {
     }
 
     /**
-     * F5: Print Assignment name and Marks
+     * F5: Calculate and Print Highest and Lowest mark
      */
     public void printHighestAndLowestMarks() {
 
@@ -105,8 +105,35 @@ public class StudentMarksStatistics {
             }
         }
 
-        System.out.println("Highest mark is = " + highestMark);
+        System.out.println("Highest mark = " + highestMark);
 
-        System.out.println("Lowest mark is = " + lowestMark);
+        System.out.println("Lowest mark = " + lowestMark);
+    }
+
+    /**
+     * F6: Calculate and print Mean and Standard Deviation of marks
+     */
+    public void printMeanAndStandardDeviation() {
+
+        double sum = 0;
+        for (int i = 0; i < totalStudents; i++) {
+            sum += marks[i];
+        }
+
+        double mean = sum / totalStudents;
+
+        double sumOfSquares = 0;
+
+        for (int i = 0; i < totalStudents; i++) {
+            var difference = marks[i] - mean;
+            sumOfSquares += (difference * difference);
+        }
+
+        double variance = sumOfSquares / totalStudents;
+
+        double standardDeviation = Math.sqrt(variance);
+
+        System.out.println("Mean of the marks = " + mean);
+        System.out.println("Standard Deviation of the marks = " + standardDeviation);
     }
 }
