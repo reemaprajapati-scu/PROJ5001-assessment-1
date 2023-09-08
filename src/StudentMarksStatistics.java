@@ -23,6 +23,7 @@ public class StudentMarksStatistics {
         return assignmentName;
     }
 
+    // Constructor to initialise total students count, scanner and marks array
     StudentMarksStatistics(int students) {
         totalStudents = students;
 
